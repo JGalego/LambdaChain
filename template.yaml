@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  LambdaChain 🔗🦜
+  Learn how to run LangChain.js apps powered by Amazon Bedrock on AWS Lambda using function URLs and response streaming
+
+Globals:
+  Function:
+    Timeout: 300
+
+Resources:
+  LambdaChainFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Policies:
+        - AWSLambdaExecute
+        - Statement:
+          - Sid: InvokeBedrockModels
+            Effect: Allow
+            Action:
+              - bedrock:InvokeModel
+              - bedrock:InvokeModelWithResponseStream
+            Resource: "*"
+      FunctionUrlConfig:
+        AuthType: AWS_IAM
+        InvokeMode: RESPONSE_STREAM
+    Metadata:
+      DockerTag: nodejs20.x-v1
+      DockerContext: ./lambdachain
+      Dockerfile: Dockerfile
+
+Outputs:
+  LambdaChainFunction:
+    Description: LambdaChain Lambda Function ARN
+    Value: !GetAtt LambdaChainFunction.Arn
+  LambdaChainFunctionUrl:
+    Description: LambdaChain Lambda Function URL
+    Value: !GetAtt LambdaChainFunctionUrl.FunctionUrl
+  LambdaChainFunctionIamRole:
+    Description: Implicit IAM Role created for LambdaChain function
+    Value: !GetAtt LambdaChainFunctionRole.Arn
