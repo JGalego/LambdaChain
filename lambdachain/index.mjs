@@ -10,8 +10,7 @@ const model = new BedrockChat({
   model: process.env.MODEL_ID || "anthropic.claude-3-sonnet-20240229-v1:0",
   region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION,
   modelKwargs: {
-	anthropic_version: process.env.ANTHROPIC_VERSION || "bedrock-2023-05-31",
-	temperature: parseFloat(process.env.TEMPERATURE) || 0.0
+    temperature: parseFloat(process.env.TEMPERATURE) || 0.0
   }
 });
 
