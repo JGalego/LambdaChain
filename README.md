@@ -38,7 +38,7 @@ Run [LangChain.js](https://js.langchain.com/v0.2/docs/introduction/) apps powere
     sam deploy --guided
 
     # ❗ Don't forget to note down the function URL
-    export YOLAMBDA_URL=`sam list stack-outputs --stack-name lambdachain --output json | jq -r '.[] | select(.OutputKey == "LambdaChainFunctionUrl") | .OutputValue'`
+    export FUNCTION_URL=`sam list stack-outputs --stack-name lambdachain --output json | jq -r '.[] | select(.OutputKey == "LambdaChainFunctionUrl") | .OutputValue'`
     ```
 
 3. Test it out!
