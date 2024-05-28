@@ -2,15 +2,23 @@
 
 ## Overview
 
-Run [LangChain.js](https://js.langchain.com/v0.2/docs/introduction/) apps powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) on [AWS Lambda](https://aws.amazon.com/lambda/) using [function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html) and [response streaming](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/).
+Run [LangChain.js](https://js.langchain.com/v0.2/docs/introduction/) applications powered by [Amazon Bedrock](https://aws.amazon.com/bedrock/) on [AWS Lambda](https://aws.amazon.com/lambda/) using [function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html) and [response streaming](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/).
 
-![LambdaChain](lambdachain.png)
+<img src="lambdachain.png" width="70%"/>
 
 ## Prerequisites
 
-* [Docker](https://docs.docker.com/engine/install/) 🐋
-* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
-* [jq](https://jqlang.github.io/jq/download/) (*optional*)
+Before proceeding, take some time perform the following prerequisite actions:
+
+1. Make sure these tools are installed and properly configured
+
+	- [Docker](https://docs.docker.com/engine/install/) 🐋
+	- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 🐿️
+	- [jq](https://jqlang.github.io/jq/download/) (*optional*)
+
+2. Request model access via [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+
+	> 💡 For more information on how enable model access, please refer to the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) (Set up > Model access)
 
 ## Instructions
 
@@ -46,7 +54,7 @@ Run [LangChain.js](https://js.langchain.com/v0.2/docs/introduction/) apps powere
     **SAM**
 
     ```bash
-    sam remote invoke --stack-name lambdachain --event '{"body": "{\"message\": \"What is quantum computing?\"}"}'
+    sam remote invoke --stack-name lambdachain --event '{"body": "{\"message\": \"What is the answer to life, the Universe and everything?\"}"}'
     ```
 
     **cURL**
@@ -58,7 +66,7 @@ Run [LangChain.js](https://js.langchain.com/v0.2/docs/introduction/) apps powere
          --user "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
          -H "x-amz-security-token: $AWS_SESSION_TOKEN" \
          -H "content-type: application/json" \
-         -d '{"message": "What is quantum computing?"}' \
+         -d '{"message": "What is the answer to life, the Universe and everything?"}' \
          $FUNCTION_URL
     ```
 
